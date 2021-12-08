@@ -1,4 +1,6 @@
-import Expenses from "./components/expense/Expenses";
+import Expenses from "./components/Expense/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
+import Card from "./components/UI/Card";
 
 function App() {
   const expenses = [
@@ -27,9 +29,17 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+
+  const expenseAddHandler = (expense) => {
+    expenses.push(expense);
+    console.log(expenses);
+  };
   return (
-    <div ClassName="expense">
-      <Expenses expense={expenses} />
+    <div className="expense">
+      <NewExpense onExpenseAdd={expenseAddHandler} />
+      <Card className="expenses">
+        <Expenses expense={expenses} />
+      </Card>
     </div>
   );
 }
