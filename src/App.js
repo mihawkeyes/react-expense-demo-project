@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import Expenses from "./components/Expense/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import Card from "./components/UI/Card";
 
 function App() {
-  const expenses = [
+  const defaultExpenses = [
     {
       id: "e1",
       title: "Light bill",
@@ -30,10 +31,14 @@ function App() {
     },
   ];
 
+  const [expenses, setExpenses] = useState(defaultExpenses);
+
   const expenseAddHandler = (expense) => {
-    expenses.push(expense);
-    console.log(expenses);
+    setExpenses((prevExpense) => {
+      return [expense, ...prevExpense];
+    });
   };
+
   return (
     <div className="expense">
       <NewExpense onExpenseAdd={expenseAddHandler} />
